@@ -83,15 +83,15 @@ public class GerenciaController {
         return  ResponseEntity.ok(solicitudEncontrada);
     }
 
-    @PostMapping("/registrar-resolucion-orgSocial")
-    public ResponseEntity< ? > registrarResolucionYOrganizacionSocial(@RequestBody ResolucionDto resolucionDto){
+    @PostMapping("/registrar-resolucion-orgSocial/{idSolicitud}")
+    public ResponseEntity< ? > registrarResolucionYOrganizacionSocial(@RequestBody ResolucionDto resolucionDto, @PathVariable int idSolicitud){
 
         Map<String, Object> response = new HashMap<>();
         OrganizacionSocial organizacionSocialNueva = null;
 
         try {
 
-            organizacionSocialNueva = gerenciaService.registrarResolucion(resolucionDto);
+            organizacionSocialNueva = gerenciaService.registrarResolucion(resolucionDto, idSolicitud);
 
         } catch (DataAccessException e) {
 

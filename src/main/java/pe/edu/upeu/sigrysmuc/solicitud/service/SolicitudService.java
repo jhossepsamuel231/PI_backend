@@ -6,6 +6,7 @@ import pe.edu.upeu.sigrysmuc.solicitud.dto.SolicitudDto;
 import pe.edu.upeu.sigrysmuc.solicitud.dto.SolicitudJuntaDirectivaDto;
 import pe.edu.upeu.sigrysmuc.solicitud.entity.Documento;
 import pe.edu.upeu.sigrysmuc.solicitud.entity.InformeTecnico;
+import pe.edu.upeu.sigrysmuc.solicitud.entity.Notificacion;
 import pe.edu.upeu.sigrysmuc.solicitud.entity.Solicitud;
 
 import java.util.List;
@@ -54,8 +55,18 @@ public interface SolicitudService {
 
     Solicitud listarSolicitudParaRegistrarInformeTecnico(int idSoliitud);
 
+    Solicitud buscarSolicitudParaSubirInformeTecnico(String codigoSolicitud);
+
     //usuario
     Solicitud verificarRegistroSolicitud(int idUsuario);
+
+    Solicitud verificarRegistradoSolicitud(int idUsuario);
+
+    //Listar soli por usuario
+
+    List<Solicitud> listadoDeSoliDeUsuarios(int idUsuario);
+
+    List<Notificacion> listadoDeNotificacionPorUsuario(int idUsuario);
 
 
 }

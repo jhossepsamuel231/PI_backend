@@ -68,6 +68,11 @@ public class SubGerenciaController {
     }
 
 
-
+    //Buscar por codigo Solicitud
+    @GetMapping("/buscarSolicitudParaSubirInformeTecnico/{codigoSolicitud}")
+    public ResponseEntity< ? > buscarSolicitudParaSubirInformeTecnico(@PathVariable String codigoSolicitud){
+        Solicitud solicitud = solicitudService.buscarSolicitudParaSubirInformeTecnico(codigoSolicitud);
+        return  ResponseEntity.ok(solicitud);
+    }
 
 }

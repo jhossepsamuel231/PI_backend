@@ -58,6 +58,9 @@ public class SolicitudServiceImpl implements SolicitudService {
     @Autowired
     private InformeTecnicoDao informeTecnicoDao;
 
+    @Autowired
+    private NotificacionDao notificacionDao;
+
     @Override
     public Solicitud registrarSolicitud(SolicitudDto solicitudDto) {
         System.out.println(solicitudDto);
@@ -77,9 +80,11 @@ public class SolicitudServiceImpl implements SolicitudService {
         registrarSolicitud.setTipoOrganizacion(tipoOrganizacion);
         registrarSolicitud.setNivelOrganizacionSocial(nivelOrganizacion);
         registrarSolicitud.setZonaUbicacion(zonaUbicacion);
+        registrarSolicitud.setCorreoSolicitante(solicitudDto.getCorreoSolicitante());
         registrarSolicitud.setEstadoSolicitd(Constantes.ESTADO_PROCESO);
         registrarSolicitud.setTipoSolicitud(tipoSolicitudEncontrado);
         registrarSolicitud.setDireccionSolicitud(solicitudDto.getDireccionSolicitud());
+        registrarSolicitud.setCorreoSolicitante(solicitudDto.getCorreoSolicitante());
         registrarSolicitud.setFechaRegistro(new Date());
 
         return solicitudDao.save(registrarSolicitud);
@@ -177,6 +182,7 @@ public class SolicitudServiceImpl implements SolicitudService {
         registrarSolicitud.setZonaUbicacion(zonaUbicacion);
         registrarSolicitud.setEstadoSolicitd(Constantes.ESTADO_PROCESO);
         registrarSolicitud.setTipoSolicitud(tipoSolicitudEncontrado);
+        registrarSolicitud.setCorreoSolicitante(solicitudDto.getCorreoSolicitante());
         registrarSolicitud.setDireccionSolicitud(solicitudDto.getDireccionSolicitud());
         registrarSolicitud.setFechaRegistro(new Date());
 
@@ -258,7 +264,27 @@ public class SolicitudServiceImpl implements SolicitudService {
     }
 
     @Override
+    public Solicitud buscarSolicitudParaSubirInformeTecnico(String codigoSolicitud) {
+        return solicitudDao.buscarSolicitudParaSubirInformeTecnico(codigoSolicitud);
+    }
+
+    @Override
     public Solicitud verificarRegistroSolicitud(int idUsuario) {
         return solicitudDao.verificarRegistroSolicitud(idUsuario);
+    }
+
+    @Override
+    public Solicitud verificarRegistradoSolicitud(int idUsuario) {
+        return solicitudDao.verificarRegistradoSolicitud(idUsuario);
+    }
+
+    @Override
+    public List<Solicitud> listadoDeSoliDeUsuarios(int idUsuario) {
+        return solicitudDao.listadoDeSolicitudPorUsuario(idUsuario);
+    }
+
+    @Override
+    public List<Notificacion> listadoDeNotificacionPorUsuario(int idUsuario) {
+        return notificacionDao.listadoDeNotificacionPorUsuario(idUsuario);
     }
 }

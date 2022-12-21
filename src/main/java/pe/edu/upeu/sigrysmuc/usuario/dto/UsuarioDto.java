@@ -19,7 +19,6 @@ public class UsuarioDto {
     private String username;
 
     private String password;
-
     private Boolean estado;
 
     private String nombrePersona;

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pe.edu.upeu.sigrysmuc.organizacionSocial.entity.NivelOrganizacionSocial;
+import pe.edu.upeu.sigrysmuc.organizacionSocial.entity.OrganizacionSocial;
 import pe.edu.upeu.sigrysmuc.organizacionSocial.entity.TipoOrganizacion;
 import pe.edu.upeu.sigrysmuc.organizacionSocial.entity.ZonaUbicacion;
 import pe.edu.upeu.sigrysmuc.usuario.entity.Usuario;
@@ -49,6 +50,9 @@ public class Solicitud  {
     @Column(name = "estado_solicitud")
     private int estadoSolicitd;
 
+    @Column(name = "correo_solicitante")
+    private String correoSolicitante;
+
     //Foraneas
 
     /*@ManyToOne
@@ -79,6 +83,11 @@ public class Solicitud  {
     @ManyToOne
     @JoinColumn(name="id_tipo_solicitud")
     private TipoSolicitud tipoSolicitud;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="id_organizacion_social")
+    private OrganizacionSocial organizacionSocialSolicitud;
     //relacion
 
     /*@OneToMany(mappedBy="solicitud")

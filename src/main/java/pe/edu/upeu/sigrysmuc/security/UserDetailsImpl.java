@@ -74,4 +74,8 @@ public class UserDetailsImpl implements UserDetails {
         return usuario.getRol();
     }
 
+    public String getCorreo(){
+        return usuario.getPersona().getCorreo();
+    }
+
 }

@@ -20,7 +20,7 @@ public interface GerenciaService {
 
     InformeTecnico listadoRegistrarResolucion(int idInformeTecnico);
 
-    OrganizacionSocial registrarResolucion(ResolucionDto resolucionDto);
+    OrganizacionSocial registrarResolucion(ResolucionDto resolucionDto, int idSolicitud);
 
     InformeTecnico listadoParaEnvioNotificacion(int idInformeTecnico);
 

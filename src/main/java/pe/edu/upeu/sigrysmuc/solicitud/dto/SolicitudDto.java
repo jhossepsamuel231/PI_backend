@@ -18,6 +18,7 @@ public class SolicitudDto {
 
     private String nombreOrganizacion;
     private String direccionSolicitud;
+    private String correoSolicitante;
 
     private Integer usuario;
 }

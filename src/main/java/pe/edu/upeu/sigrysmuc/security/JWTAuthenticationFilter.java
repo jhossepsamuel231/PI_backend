@@ -40,7 +40,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
         System.out.println("SUCCESS AUTHORITIES: " + userDetails.getAuthorities());
-        String token = TokenSecurity.createToken(userDetails.getIdUsuario(), userDetails.getNombre(), userDetails.getUsername(), userDetails.getRol().getNombreRol());
+        String token = TokenSecurity.createToken(userDetails.getIdUsuario(), userDetails.getNombre(), userDetails.getUsername(), userDetails.getRol().getNombreRol(), userDetails.getCorreo());
 
         response.addHeader("Access-Control-Expose-Headers", "Authorization");
         response.addHeader("Authorization", "Bearer " + token);

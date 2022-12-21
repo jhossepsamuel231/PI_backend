@@ -7,13 +7,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.sigrysmuc.solicitud.entity.Notificacion;
 import pe.edu.upeu.sigrysmuc.solicitud.entity.Solicitud;
 import pe.edu.upeu.sigrysmuc.solicitud.service.SolicitudService;
+import pe.edu.upeu.sigrysmuc.usuario.dto.RecuperarCuentaDto;
 import pe.edu.upeu.sigrysmuc.usuario.dto.UsuarioDto;
+import pe.edu.upeu.sigrysmuc.usuario.entity.Persona;
 import pe.edu.upeu.sigrysmuc.usuario.entity.Usuario;
 import pe.edu.upeu.sigrysmuc.usuario.service.UsuarioService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -64,5 +68,24 @@ public class UsuarioController {
 		Solicitud solicitud = solicitudService.verificarRegistroSolicitud(idUsuario);
 		return  ResponseEntity.ok(solicitud);
 	}
+
+	@GetMapping("/verificarRegistradoSolicitud/{idUsuario}")
+	public ResponseEntity< ? > verificarRegistradoSolicitud(@PathVariable int idUsuario){
+		Solicitud solicitud = solicitudService.verificarRegistradoSolicitud(idUsuario);
+		return  ResponseEntity.ok(solicitud);
+	}
+
+	@GetMapping("/listadoSolicitudPorUsuario/{idUsuario}")
+	public ResponseEntity< ? > listadoDeSolicitudPorUsuario(@PathVariable int idUsuario){
+		List<Solicitud> solicitud = solicitudService.listadoDeSoliDeUsuarios(idUsuario);
+		return  ResponseEntity.ok(solicitud);
+	}
+
+	@GetMapping("/listadoNotificacionPorUsuario/{idUsuario}")
+	public ResponseEntity< ? > listadoDeNotificacionPorUsuario(@PathVariable int idUsuario){
+		List<Notificacion> notificacion = solicitudService.listadoDeNotificacionPorUsuario(idUsuario);
+		return  ResponseEntity.ok(notificacion);
+	}
+
 
 }

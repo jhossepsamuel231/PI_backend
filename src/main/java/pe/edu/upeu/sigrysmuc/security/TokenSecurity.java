@@ -19,13 +19,14 @@ public class TokenSecurity {
     private final static String ACCESS_TOKEN_SECRET = "4214jfsajdaojjljllsdjaofaosfasjfoj";
     private final static Long ACCESS_TOKEN_TIME = 2_592_000L;
 
-    public static String createToken(int idUsuario, String nombre, String username, String rol) {
+    public static String createToken(int idUsuario, String nombre, String username, String rol, String correo) {
         long expirationTime = ACCESS_TOKEN_TIME * 1_000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
         Map<String, Object> extra = new HashMap<>();
         extra.put("idUsuario", idUsuario);
         extra.put("nombre", nombre);
         extra.put("rol", rol);
+        extra.put("correo", correo);
         return Jwts
                 .builder()
                 .setSubject(username)

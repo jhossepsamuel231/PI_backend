@@ -1,6 +1,8 @@
 package pe.edu.upeu.sigrysmuc.usuario.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -8,14 +10,20 @@ import pe.edu.upeu.sigrysmuc.solicitud.dao.RolDao;
 import pe.edu.upeu.sigrysmuc.usuario.dao.PersonaDao;
 import pe.edu.upeu.sigrysmuc.constantes.Constantes;
 import pe.edu.upeu.sigrysmuc.usuario.dao.UsuarioDao;
+import pe.edu.upeu.sigrysmuc.usuario.dto.RecuperarCuentaDto;
 import pe.edu.upeu.sigrysmuc.usuario.dto.UsuarioDto;
 import pe.edu.upeu.sigrysmuc.usuario.entity.Persona;
 import pe.edu.upeu.sigrysmuc.usuario.entity.Rol;
 import pe.edu.upeu.sigrysmuc.usuario.entity.Usuario;
 import pe.edu.upeu.sigrysmuc.usuario.service.UsuarioService;
 
+import javax.mail.internet.MimeMessage;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     @Autowired
     private UsuarioDao usuarioDao;

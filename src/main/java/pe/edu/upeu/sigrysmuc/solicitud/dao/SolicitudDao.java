@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pe.edu.upeu.sigrysmuc.organizacionSocial.entity.JuntaDirectiva;
 import pe.edu.upeu.sigrysmuc.solicitud.entity.InformeTecnico;
+import pe.edu.upeu.sigrysmuc.solicitud.entity.Notificacion;
 import pe.edu.upeu.sigrysmuc.solicitud.entity.Solicitud;
 
 import java.util.List;
@@ -33,7 +34,19 @@ public interface SolicitudDao extends JpaRepository<Solicitud, Integer> {
     //gerencia parte dos
 
     //Usuario
-    @Query(value = "SELECT * FROM usuarios AS usu INNER JOIN solicitud AS soli ON usu.id_usuario=soli.id_usuario WHERE soli.estado_solicitud=5 AND usu.id_usuario=?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM usuarios AS usu INNER JOIN solicitud AS soli ON usu.id_usuario=soli.id_usuario WHERE soli.id_tipo_solicitud=1 AND usu.id_usuario=?1", nativeQuery = true)
     Solicitud verificarRegistroSolicitud(int idUsuario);
 
+    @Query(value = "SELECT * FROM usuarios AS usu INNER JOIN solicitud AS soli ON usu.id_usuario=soli.id_usuario WHERE soli.id_tipo_solicitud=1 AND soli.estado_solicitud=5 AND usu.id_usuario=?1", nativeQuery = true)
+    Solicitud verificarRegistradoSolicitud(int idUsuario);
+
+    //SubGerencia:
+
+    @Query(value = "SELECT * FROM  solicitud AS soli INNER JOIN tipo_solicitud AS tipoSoli ON soli.id_tipo_solicitud=tipoSoli.id_tipo_solicitud WHERE soli.estado_solicitud=3 AND soli.codigo_solicitud=?1", nativeQuery = true)
+    Solicitud buscarSolicitudParaSubirInformeTecnico(String codigoSolicitud);
+
+    //Usuario
+
+    @Query(value = "SELECT * FROM solicitud AS soli INNER JOIN usuarios AS usu ON soli.id_usuario=usu.id_usuario WHERE soli.id_usuario=?1", nativeQuery = true)
+    List<Solicitud> listadoDeSolicitudPorUsuario(int idUsuario);
 }

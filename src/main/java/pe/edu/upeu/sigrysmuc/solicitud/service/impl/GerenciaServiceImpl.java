@@ -66,7 +66,7 @@ public class GerenciaServiceImpl implements GerenciaService {
     }
 
     @Override
-    public OrganizacionSocial registrarResolucion(ResolucionDto resolucionDto) {
+    public OrganizacionSocial registrarResolucion(ResolucionDto resolucionDto, int idSolicitud) {
         Resolucion resolucionNueva = new Resolucion();
 
         resolucionNueva.setDocumentoResolucion(resolucionDto.getDocumentoResolucion());
@@ -85,8 +85,12 @@ public class GerenciaServiceImpl implements GerenciaService {
         organizacionSocialNueva.setEstadoOrganizacionSocial(Constantes.ORGANIZACION_SOCIAL_CREADA);
         organizacionSocialNueva.setFechaVigencia(date.plusYears(4));
         organizacionSocialNueva.setResolucion(resolucion);
+        organizacionSocialDao.save(organizacionSocialNueva);
 
-        OrganizacionSocial organizacionSocialCreada = organizacionSocialDao.save(organizacionSocialNueva);
+        OrganizacionSocial organizacionSocialCreada = organizacionSocialDao.findById(organizacionSocialNueva.getIdOrganizacionSocial()).orElse(null);
+        Solicitud solicitud = new Solicitud();
+
+        solicitud.setOrganizacionSocialSolicitud(organizacionSocialCreada);
         organizacionSocialCreada.setCodigoOrganizacionSocial("organizacion-"+organizacionSocialCreada.getIdOrganizacionSocial());
 
         return organizacionSocialDao.save(organizacionSocialCreada);
@@ -115,7 +119,6 @@ public class GerenciaServiceImpl implements GerenciaService {
             helper.setSubject("Universidad Peruana Union - Informe");
             helper.setText(contentHtml(notificacion.getDocumentoNotificacion()), true);
             mailSender.send(mimeMessage);
-
         } catch (Exception e) {
         }
         return notificacionDao.save(notificacion);
