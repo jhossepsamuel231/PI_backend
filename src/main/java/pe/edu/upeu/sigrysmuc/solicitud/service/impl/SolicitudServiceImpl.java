@@ -216,7 +216,7 @@ public class SolicitudServiceImpl implements SolicitudService {
 
         if (area.equals("mesaDePartes")) {
             solicitudEncontrada.setCodigoSolicitud("codigo-"+solicitudEncontrada.getIdSolicitud());
-            solicitudEncontrada.setNumeroExpediente("exp-"+solicitudEncontrada.getIdSolicitud());
+            solicitudEncontrada.setNumeroExpediente("0"+solicitudEncontrada.getIdSolicitud()+"-MDC-GPV-SOV-RUOS");
             solicitudEncontrada.setEstadoSolicitd(2);
 
         } else if (area.equals("GerenciaUno")) {
